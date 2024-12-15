@@ -1,0 +1,96 @@
+
+.navbar {
+    background-color: #22303F;
+    padding: 0.8rem 0;
+}
+
+.navbar-brand, .nav-link, .btn-search {
+    color: #f5f5f5;
+    font-size: 1.2rem;
+    padding: 0.5rem 0.8rem;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #8FBFDA;
+}
+
+.form-control {
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    border: 2px solid #8FBFDA;
+    padding: 0.8rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn-search {
+    background-color: #2C6485;
+    color: #f5f5f5;
+    border-radius: 20px;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #394A56;
+    color: #E7E8E7;
+}
+
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    color: #f5f5f5;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 2rem;
+}
+
+.btn-view {
+    background-color: #2C6485;
+    color: #f5f5f5;
+    border-radius: 20px;
+    padding: 0.7rem 1.5rem;
+}
+
+.btn-view:hover {
+    background-color: #394A56;
+}
+
+.featured-recipes h2, .categories-section h2 {
+    color: #394A56;
+    text-align: center;
+    margin: 3rem 0;
+    font-weight: bold;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f5f5f5;
+    margin: 1.5rem 0;
+    padding: 1rem;
+}
+
+footer {
+    background-color: #22303F;
+    color: #f5f5f5;
+    padding: 3rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}

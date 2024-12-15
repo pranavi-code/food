@@ -1,0 +1,159 @@
+/* Container for the entire login page */
+
+body.login-page {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #87a8e5, #d4dfe8);
+    color: #000000;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.login-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px; /* Fixed width instead of percentage */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image Section */
+  .login-image-section {
+    flex: 1;
+    min-height: 250px;
+    position: relative;
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
+  }
+  
+  .login-image-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(73, 97, 120, 0.5);
+  }
+  /* Form Section */
+  .login-form-section {
+    flex: 1.2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #dce6ee, #aabde0);
+    color: #000000;
+  }
+  
+  .login-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .login-description {
+    margin-bottom: 20px;
+  }
+  
+  /* Login Form Styles */
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .login-remember-me label {
+    margin-left: 5px;
+  }
+  
+  .login-forgot-password {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-submit-button{
+    width: 100%;
+    padding: 10px;
+    background: #8AAAE5;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .login-submit-button:hover {
+    background: #0056b3;
+  }
+  
+  /* Social Login Styles */
+  .social-login-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .social-login-text {
+    margin-bottom: 10px;
+  }
+  
+  .social-login-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .social-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px; /* Added fixed width */
+  }
+  
+  .google-login-button {
+    background: #db4437;
+    color: #fff;
+  }
+  
+  .social-login-register {
+    font-size: 14px;
+  }
+  
+  .social-login-register-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Add these styles to your existing Login.css file */
+  .login-error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }

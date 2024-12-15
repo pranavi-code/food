@@ -1,0 +1,124 @@
+/* General Styling */
+.user-management-page {
+  height: 100%;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.user-management-navbar {
+  background-color: #2C6485;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.user-management-navbar .navbar-brand {
+  color: #ffffff;
+  font-weight: 500;
+  margin-right: 30px;
+}
+
+/* Main Container */
+.user-management-container {
+  max-width: 100%;
+  width: 90%;
+  margin: 30px auto auto;
+  flex-grow: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.user-management-header {
+  background-color: #2C6485;
+  padding: 1.75rem;
+  border-radius: 12px;
+  color: #ffffff;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Styling */
+.user-management-table th,
+.user-management-table td {
+  text-align: center;
+  font-size: 1rem;
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+
+/* Action Buttons */
+.user-management-table .btn {
+  margin: 0 5px;
+}
+
+/* Add User & Export Buttons */
+.user-management-actions {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.user-management-actions .btn {
+  margin-right: 10px;
+}
+
+/* Footer */
+.user-management-footer {
+  background-color: rgba(34, 48, 63, 0.95);
+  color: #ffffff;
+  padding: 1.25rem 0;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-management-container {
+      margin-top: 15px;
+      padding: 1.5rem;
+      width: 95%;
+  }
+
+  .user-management-header {
+      padding: 1.25rem;
+      text-align: center;
+  }
+
+  .user-management-table th,
+  .user-management-table td {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-management-container {
+      padding: 1rem;
+      width: 100%;
+  }
+
+  .user-management-header {
+      font-size: 1rem;
+      padding: 1rem;
+  }
+
+  .user-management-footer {
+      font-size: 0.9rem;
+      padding: 1rem 0;
+  }
+
+  .user-management-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+  }
+}

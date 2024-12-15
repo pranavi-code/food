@@ -1,0 +1,142 @@
+/* General Styling */
+
+
+/* Navbar */
+.myaccount-navbar {
+    background-color: #1a2736;
+    padding: 1.2rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.myaccount-navbar .navbar-brand,
+.myaccount-navbar .nav-link,
+.myaccount-navbar .btn-search {
+    color: #f5f5f5;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+.myaccount-navbar .navbar-brand:hover,
+.myaccount-navbar .nav-link:hover {
+    color: #8FBFDA;
+    text-decoration: none;
+}
+.myaccount-navbar .navbar-toggler {
+    border-color: #f5f5f5;
+    padding: 0.4rem 0.8rem;
+    margin-right: 1rem;
+}
+.myaccount-navbar .navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(143, 191, 218, 0.25);
+}
+
+/* Account Container Styling */
+.myaccount-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Section */
+.myaccount-profile-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #394A56;
+}
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #2C6485;
+    object-fit: cover;
+}
+.myaccount-profile-info {
+    flex: 1;
+}
+.myaccount-profile-info p {
+    margin: 0.3rem 0;
+}
+.btn-edit {
+    background-color: #2C6485;
+    color: #E7E8E7;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+}
+.btn-edit:hover {
+    background-color: #8FBFDA;
+}
+
+/* Saved Recipes Section */
+.myaccount-saved-recipes {
+    margin: 2rem 0;
+}
+.myaccount-recipe-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #F1F4F6;
+    border-radius: 10px;
+    align-items: center;
+}
+.recipe-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.btn-view {
+    background-color: #2C6485;
+    border-radius: 20px;
+    color: #E7E8E7;
+    padding: 0.5rem 1rem;
+}
+.btn-view:hover {
+    background-color: #8FBFDA;
+}
+.btn-delete {
+    background-color: #D9534F;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    color: #E7E8E7;
+}
+.btn-delete:hover {
+    background-color: #C9302C;
+}
+
+/* Settings Section */
+.myaccount-settings-section form {
+    max-width: 600px;
+}
+.form-control {
+    border-radius: 20px;
+    background-color: #e2e2e3;
+    border: none;
+    padding: 0.6    rem;
+    line-height: normal; /* Added to fix text alignment */
+    vertical-align: middle; /* Added to center text vertically */
+}
+.btn-save {
+    background-color: #2C6485;
+    color: #E7E8E7;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+}
+.btn-save:hover {
+    background-color: #8FBFDA;
+}
+
+/* Footer */
+.myaccount-footer {
+    background-color: #394A56;
+    color: #E7E8E7;
+    text-align: center;
+    padding: 1rem 0;
+}

@@ -1,0 +1,52 @@
+.feedback-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #f5f5f5;
+  }
+  
+  .feedback-navbar {
+    background-color: #2C6485;
+  }
+  
+  .feedback-navbar .navbar-brand {
+    color: #fff;
+  }
+  
+  .feedback-content {
+    flex-grow: 1;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .feedback-header {
+    background-color: #2C6485;
+    padding: 1.5rem;
+    border-radius: 10px;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+  
+  .feedback-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .feedback-card-header {
+    background-color: #2C6485;
+    color: #fff;
+  }
+  
+  .feedback-footer-wrapper {
+    margin-top: auto;
+  }
+  
+  footer {
+    background-color: rgba(34, 48, 63, 0.9);
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  
