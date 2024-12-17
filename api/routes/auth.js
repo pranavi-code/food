@@ -1,10 +1,27 @@
 const express = require('express');
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const validator = require('validator');
 
 const router = express.Router();
+
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+    const token = req.headers['authorization']?.split(' ')[1]; // Extract token from Authorization header
+    if (!token) {
+        return res.status(403).json({ message: 'Token is required!' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid token!' });
+        }
+        req.user = decoded; // Store decoded user info in request for use in other routes
+        next();
+    });
+};
 
 // User Registration Route
 router.post('/register', async (req, res) => {
@@ -62,10 +79,25 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({
             message: user.role === 'admin' ? 'Admin login successful' : 'User login successful',
             token,
-            userRole:user.role,
+            userRole: user.role,
         });
     } catch (error) {
         console.error("Error during login:", error);
+        res.status(500).json({ message: 'Server error!' });
+    }
+});
+
+// Fetch User Details Route
+router.get('/me', verifyToken, async (req, res) => {
+    try {
+        // Fetch the user details using the user ID from the token
+        const user = await User.findById(req.user.userId).select('-password'); // Exclude password from response
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!' });
+        }
+        res.json(user); // Send user details back to client
+    } catch (error) {
+        console.error("Error fetching user details:", error);
         res.status(500).json({ message: 'Server error!' });
     }
 });

@@ -1,31 +1,84 @@
-import React from "react";
-import adminDashboardImage from "../images/admin_dashboard.jpeg"; // Importing the background image
+import React, { useEffect, useState } from "react";
+import adminDashboardImage from "../images/admin_dashboard.jpeg";
 import "./FeedbackReports.css";
 
 const FeedbackReports = () => {
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [modalMessage, setModalMessage] = useState("");
+
   const logout = () => {
     sessionStorage.removeItem("authToken");
     localStorage.removeItem("authToken");
     window.location.href = "landpage.html";
   };
 
-  const viewFeedback = (submitter, type, message) => {
-    document.getElementById("feedbackMessage").textContent = message;
-    new window.bootstrap.Modal(document.getElementById("feedbackModal")).show();
+  const viewFeedback = (message) => {
+    setModalMessage(message);
+    const modal = new window.bootstrap.Modal(document.getElementById("feedbackModal"));
+    modal.show();
   };
 
-  const markAsResolved = (button) => {
-    let row = button.closest("tr");
-    let statusCell = row.querySelector(".feedback-status-cell");
-    statusCell.innerHTML = '<span class="badge bg-success">Resolved</span>';
-  };
+  const markAsResolved = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/feedback/${id}/resolve`, {
+        method: "PUT",
+      });
 
-  const deleteFeedback = (button) => {
-    if (window.confirm("Are you sure you want to delete this feedback?")) {
-      let row = button.closest("tr");
-      row.remove();
+      if (response.ok) {
+        const updatedFeedbacks = feedbacks.map((feedback) =>
+          feedback._id === id ? { ...feedback, status: "Resolved" } : feedback
+        );
+        setFeedbacks(updatedFeedbacks);
+        alert("Feedback marked as resolved!");
+      } else {
+        console.error("Failed to mark as resolved:", response.statusText);
+        alert("Failed to mark feedback as resolved.");
+      }
+    } catch (error) {
+      console.error("Error marking feedback as resolved:", error);
+      alert("An error occurred while resolving feedback.");
     }
   };
+
+  const deleteFeedback = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/feedback/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        const remainingFeedbacks = feedbacks.filter((feedback) => feedback._id !== id);
+        setFeedbacks(remainingFeedbacks);
+        alert("Feedback deleted successfully!");
+      } else {
+        console.error("Failed to delete feedback:", response.statusText);
+        alert("Failed to delete feedback. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting feedback:", error);
+      alert("An error occurred while deleting feedback.");
+    }
+  };
+
+  useEffect(() => {
+    const fetchFeedbacks = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/feedback");
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Fetched feedback data:", data); // Debugging log
+          setFeedbacks(data);
+        } else {
+          console.error("Failed to fetch feedbacks:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching feedbacks:", error);
+      }
+    };
+
+    fetchFeedbacks();
+  }, []);
 
   return (
     <div
@@ -54,13 +107,36 @@ const FeedbackReports = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item"><a className="nav-link" href="/adminDash">Dashboard</a></li>
-              <li className="nav-item"><a className="nav-link" href="/recipeManagement">Recipe Management</a></li>
-              <li className="nav-item"><a className="nav-link" href="/categoryManagment">Category Management</a></li>
-              <li className="nav-item"><a className="nav-link" href="/userManagement">Manage Users</a></li>
-              <li className="nav-item"><a className="nav-link" href="/setting">Settings</a></li>
-              <li className="nav-item"><a className="nav-link" href="/feedback">Feedback</a></li>
-              <a className="nav-link" href="/" id="logoutBtn" onClick={logout}>Logout</a>
+            <li className="nav-item">
+                <a className="nav-link" href="/adminDash">
+                  Dashboard
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/recipeManagement">
+                  Recipe Management
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/categoryManagement">
+                  Category Management
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/userManagement">
+                  Manage Users
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/setting">
+                  Settings
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/feedback">
+                  Feedback
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -72,16 +148,6 @@ const FeedbackReports = () => {
           <h2>Feedback and Reports</h2>
         </div>
 
-        {/* Feedback Filters */}
-        <div className="mb-4">
-          <select className="form-select feedback-filter" aria-label="Feedback Type">
-            <option selected>Filter by Feedback Type</option>
-            <option value="complaint">Complaint</option>
-            <option value="suggestion">Suggestion</option>
-            <option value="bug_report">Bug Report</option>
-          </select>
-        </div>
-
         {/* Feedback Table */}
         <div className="card feedback-card mb-4">
           <div className="card-header feedback-card-header">Feedback/Reports</div>
@@ -91,76 +157,82 @@ const FeedbackReports = () => {
                 <thead>
                   <tr>
                     <th>Submitted By</th>
-                    <th>Type</th>
                     <th>Message</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>John Doe</td>
-                    <td>Complaint</td>
-                    <td>Issue with login functionality.</td>
-                    <td className="feedback-status-cell"><span className="badge bg-warning">Open</span></td>
-                    <td>
-                      <button className="btn btn-success btn-sm" onClick={() => viewFeedback("John Doe", "Complaint", "Issue with login functionality.")}>View</button>
-                      <button className="btn btn-primary btn-sm" onClick={(e) => markAsResolved(e.target)}>Mark as Resolved</button>
-                      <button className="btn btn-danger btn-sm" onClick={(e) => deleteFeedback(e.target)}>Delete</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jane Smith</td>
-                    <td>Bug Report</td>
-                    <td>Button not working on homepage.</td>
-                    <td className="feedback-status-cell"><span className="badge bg-success">Resolved</span></td>
-                    <td>
-                      <button className="btn btn-success btn-sm" onClick={() => viewFeedback("Jane Smith", "Bug Report", "Button not working on homepage.")}>View</button>
-                      <button className="btn btn-primary btn-sm" onClick={(e) => markAsResolved(e.target)}>Mark as Resolved</button>
-                      <button className="btn btn-danger btn-sm" onClick={(e) => deleteFeedback(e.target)}>Delete</button>
-                    </td>
-                  </tr>
+                  {feedbacks.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" className="text-center">No feedback available.</td>
+                    </tr>
+                  ) : (
+                    feedbacks.map((feedback) => (
+                      <tr key={feedback._id}>
+                        <td>{feedback.name || "Anonymous"}</td>
+                        <td>{feedback.message}</td>
+                        <td>{feedback.status || "Pending"}</td>
+                        <td>
+                          <button
+                            className="btn btn-primary btn-sm"
+                            onClick={() => viewFeedback(feedback.message)}
+                          >
+                            View
+                          </button>
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() => markAsResolved(feedback._id)}
+                          >
+                            Mark as Resolved
+                          </button>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => deleteFeedback(feedback._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
-        {/* Pagination */}
-        <nav>
-          <ul className="pagination">
-            <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
       </div>
 
       {/* Modal */}
-      <div className="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+      <div className="modal fade" id="feedbackModal" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="feedbackModalLabel">View Feedback</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 className="modal-title">View Feedback</h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
             </div>
             <div className="modal-body">
-              <p id="feedbackMessage"></p>
+              <p>{modalMessage}</p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="feedback-footer-wrapper">
-        <footer>
-          <p>&copy; 2024 Culinary Quest. All rights reserved.</p>
-        </footer>
-      </div>
+      <footer className="footer">
+        <p>&copy; 2024 Culinary Quest. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

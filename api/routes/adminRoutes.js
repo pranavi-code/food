@@ -11,16 +11,15 @@ router.get('/dashboard', adminMiddleware, (req, res) => {
 
 
 // Fetch Total Users
-router.get('/total-users', adminMiddleware, async (req, res) => {
+router.get('/total-users', async (req, res) => {
     try {
         const totalUsers = await User.countDocuments();
         res.status(200).json({ totalUsers });
     } catch (error) {
         console.error("Error fetching total users:", error);
-        res.status(500).json({ message: 'Server error!' });
+        res.status(500).json({ message: "Server error!" });
     }
 });
-
 // Delete User Route
 router.delete('/delete-user/:id', adminMiddleware, async (req, res) => {
     try {
@@ -30,7 +29,7 @@ router.delete('/delete-user/:id', adminMiddleware, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found!' });
         }
-
+s
         res.status(200).json({ message: `User with ID ${userId} deleted successfully!` });
     } catch (error) {
         console.error("Error deleting user:", error);

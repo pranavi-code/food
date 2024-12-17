@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -10,15 +11,14 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        username,
+        password,
       });
 
-      const data = await response.json();
+      const data = response.data;
 
-      if (response.ok) {
+      if (response.status === 200) {
         // Store token and user role in localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.userRole);
@@ -33,8 +33,10 @@ function LoginForm() {
         alert(data.message || "Login failed. Please try again.");
       }
     } catch (error) {
+      // Handle specific error messages
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again later.";
       console.error("Login error:", error);
-      alert("Something went wrong. Please try again later.");
+      alert(errorMessage);
     }
   };
 
@@ -75,4 +77,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-

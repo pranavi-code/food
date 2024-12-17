@@ -1,51 +1,112 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RecipeManagement.css';
+
 const RecipeManagement = () => {
+    // State to manage recipes
+    const [recipes, setRecipes] = useState([]);
+    const [newRecipe, setNewRecipe] = useState({
+        name: '',
+        ingredients: '',
+        steps: '',
+        category: 'Italian',
+        image: null,
+    });
+
+    // Handle logout functionality
     const logout = () => {
         sessionStorage.removeItem('authToken');
         localStorage.removeItem('authToken');
         window.location.href = "landing.html";
     };
 
-    const approveRecipe = (button) => {
-        let row = button.closest('tr');
-        let statusCell = row.querySelector('td:nth-child(4)');
-        statusCell.innerHTML = '<span class="badge bg-success">Approved</span>';
+    // Handle recipe approval
+    const approveRecipe = (index) => {
+        const updatedRecipes = [...recipes];
+        updatedRecipes[index].status = 'Approved';
+        setRecipes(updatedRecipes);
     };
 
-    const rejectRecipe = (button) => {
-        let row = button.closest('tr');
-        let statusCell = row.querySelector('td:nth-child(4)');
-        statusCell.innerHTML = '<span class="badge bg-danger">Rejected</span>';
+    // Handle recipe rejection
+    const rejectRecipe = (index) => {
+        const updatedRecipes = [...recipes];
+        updatedRecipes[index].status = 'Rejected';
+        setRecipes(updatedRecipes);
     };
 
-    const editRecipe = (button) => {
-        let row = button.closest('tr');
-        let name = row.cells[0].innerText;
-        let category = row.cells[2].innerText;
-        let steps = row.cells[3].innerText;
-        alert(`Editing Recipe: ${name}`);
+    // Handle recipe editing
+    const editRecipe = (index) => {
+        const recipe = recipes[index];
+        alert(`Editing Recipe: ${recipe.name}`);
+        // Implement editing logic here
     };
 
-    const deleteRecipe = (button) => {
-        let row = button.closest('tr');
+    // Handle recipe deletion
+    const deleteRecipe = (index) => {
         if (confirm("Are you sure you want to delete this recipe?")) {
-            row.remove();
+            const updatedRecipes = recipes.filter((_, i) => i !== index);
+            setRecipes(updatedRecipes);
         }
     };
 
+    // Handle search functionality
     const filterRecipes = () => {
         let searchTerm = document.getElementById('recipeSearch').value.toLowerCase();
-        let rows = document.querySelectorAll('.recipe-management-table tr');
+        let rows = document.querySelectorAll('.recipe-management-table tbody tr');
         rows.forEach(row => {
             let name = row.cells[0].innerText.toLowerCase();
-            let ingredients = row.cells[1].innerText.toLowerCase();
-            if (name.includes(searchTerm) || ingredients.includes(searchTerm)) {
+            let ingredients = row.cells[1]?.innerText.toLowerCase();
+            if (name.includes(searchTerm) || ingredients?.includes(searchTerm)) {
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
             }
         });
+    };
+
+    // Handle recipe addition
+    const handleAddRecipe = (e) => {
+        e.preventDefault();
+        
+        const recipeToAdd = {
+            ...newRecipe,
+            status: 'Pending',
+            submittedBy: 'Admin', // Placeholder for the submitted by field
+        };
+
+        // Update recipes state
+        setRecipes([...recipes, recipeToAdd]);
+        alert("Recipe added successfully!");
+
+        // Manually hide the modal
+        const modal = document.getElementById('addRecipeModal');
+        const bootstrapModal = new window.bootstrap.Modal(modal);
+        bootstrapModal.hide(); // Hides the modal
+
+        // Reset the form
+        setNewRecipe({
+            name: '',
+            ingredients: '',
+            steps: '',
+            category: 'Italian',
+            image: null,
+        });
+    };
+
+    // Handle form input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewRecipe((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    // Handle file input change
+    const handleFileChange = (e) => {
+        setNewRecipe((prev) => ({
+            ...prev,
+            image: e.target.files[0],
+        }));
     };
 
     return (
@@ -98,44 +159,26 @@ const RecipeManagement = () => {
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody id="recipeList">
-                                    <tr>
-                                        <td>Spaghetti Carbonara</td>
-                                        <td>John Doe</td>
-                                        <td>Italian</td>
-                                        <td><span className="badge bg-warning">Pending</span></td>
-                                        <td>
-                                            <button className="btn btn-success btn-sm" onClick={(e) => approveRecipe(e.target)}>Approve</button>
-                                            <button className="btn btn-danger btn-sm" onClick={(e) => rejectRecipe(e.target)}>Reject</button>
-                                            <button className="btn btn-primary btn-sm" onClick={(e) => editRecipe(e.target)}>Edit</button>
-                                            <button className="btn btn-danger btn-sm" onClick={(e) => deleteRecipe(e.target)}>Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Chocolate Cake</td>
-                                        <td>Jane Smith</td>
-                                        <td>Dessert</td>
-                                        <td><span className="badge bg-success">Approved</span></td>
-                                        <td>
-                                            <button className="btn btn-primary btn-sm" onClick={(e) => editRecipe(e.target)}>Edit</button>
-                                            <button className="btn btn-danger btn-sm" onClick={(e) => deleteRecipe(e.target)}>Delete</button>
-                                        </td>
-                                    </tr>
+                                <tbody>
+                                    {recipes.map((recipe, index) => (
+                                        <tr key={index}>
+                                            <td>{recipe.name}</td>
+                                            <td>{recipe.submittedBy}</td>
+                                            <td>{recipe.category}</td>
+                                            <td><span className={`badge bg-${recipe.status === 'Approved' ? 'success' : recipe.status === 'Rejected' ? 'danger' : 'warning'}`}>{recipe.status}</span></td>
+                                            <td>
+                                                <button className="btn btn-success" onClick={() => approveRecipe(index)}>Approve</button>
+                                                <button className="btn btn-danger" onClick={() => rejectRecipe(index)}>Reject</button>
+                                                <button className="btn btn-warning" onClick={() => editRecipe(index)}>Edit</button>
+                                                <button className="btn btn-secondary" onClick={() => deleteRecipe(index)}>Delete</button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
-                {/* Pagination (Placeholder) */}
-                <nav>
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
 
                 {/* Add New Recipe Button */}
                 <button className="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#addRecipeModal">Add New Recipe</button>
@@ -149,45 +192,77 @@ const RecipeManagement = () => {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <form id="addRecipeForm">
+                                <form id="addRecipeForm" onSubmit={handleAddRecipe}>
                                     <div className="mb-3">
                                         <label htmlFor="recipeName" className="form-label">Recipe Name</label>
-                                        <input type="text" className="form-control" id="recipeName" required />
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            id="recipeName" 
+                                            name="name" 
+                                            value={newRecipe.name} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="ingredients" className="form-label">Ingredients</label>
-                                        <textarea className="form-control" id="ingredients" rows="3" required></textarea>
+                                        <textarea 
+                                            className="form-control" 
+                                            id="ingredients" 
+                                            name="ingredients" 
+                                            rows="3" 
+                                            value={newRecipe.ingredients} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        ></textarea>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="steps" className="form-label">Steps</label>
-                                        <textarea className="form-control" id="steps" rows="3" required></textarea>
+                                        <textarea 
+                                            className="form-control" 
+                                            id="steps" 
+                                            name="steps" 
+                                            rows="3" 
+                                            value={newRecipe.steps} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        ></textarea>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="category" className="form-label">Category</label>
-                                        <select className="form-select" id="category" required>
+                                        <select 
+                                            className="form-select" 
+                                            id="category" 
+                                            name="category" 
+                                            value={newRecipe.category} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        >
                                             <option value="Italian">Italian</option>
-                                            <option value="Dessert">Dessert</option>
+                                            <option value="Chinese">Chinese</option>
                                             <option value="Mexican">Mexican</option>
                                             <option value="Indian">Indian</option>
+                                            <option value="Dessert">Dessert</option>
                                         </select>
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="recipeImage" className="form-label">Recipe Image</label>
-                                        <input type="file" className="form-control" id="recipeImage" accept="image/*" />
+                                        <label htmlFor="image" className="form-label">Upload Image</label>
+                                        <input 
+                                            type="file" 
+                                            className="form-control" 
+                                            id="image" 
+                                            name="image" 
+                                            accept="image/*" 
+                                            onChange={handleFileChange} 
+                                        />
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" className="btn btn-primary">Add Recipe</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* Footer */}
-            <div className="footer-wrapper">
-                <footer>
-                    <p>&copy; 2024 Culinary Quest. All rights reserved.</p>
-                </footer>
             </div>
         </div>
     );
