@@ -1,64 +1,81 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
+import axios from "axios";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
-        username,
-        password,
-      });
+      console.log("Sending login request with:", formData); // Debug log
 
-      const data = response.data;
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
-      if (response.status === 200) {
-        // Store token and user role in localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.userRole);
+      console.log("Login response:", response.data); // Debug log
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.user.role);
+        localStorage.setItem("username", response.data.user.username);
 
         // Redirect based on role
-        if (data.userRole === "admin") {
-          navigate("/adminDash"); // Redirect to Admin Dashboard
+        if (response.data.user.role === "admin") {
+          navigate("/adminDash");
         } else {
-          navigate("/home"); // Redirect to Home Page
+          navigate("/home");
         }
-      } else {
-        alert(data.message || "Login failed. Please try again.");
       }
     } catch (error) {
-      // Handle specific error messages
-      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again later.";
-      console.error("Login error:", error);
-      alert(errorMessage);
+      console.error("Login error details:", error.response?.data); // Debug log
+      setError(error.response?.data?.message || "Login failed. Please try again.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="login-form-container">
+      {error && <div className="alert alert-danger">{error}</div>}
       <div className="login-input-group">
         <input
           type="text"
+          name="username"
           placeholder="Username"
           className="login-input-field"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={formData.username}
+          onChange={handleChange}
           required
         />
       </div>
       <div className="login-input-group">
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="login-input-field"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
           required
         />
       </div>
@@ -67,7 +84,9 @@ function LoginForm() {
           <input type="checkbox" id="login-remember-checkbox" />
           <label htmlFor="login-remember-checkbox">Remember me</label>
         </div>
-        <a href="/resetPassword" className="login-forgot-password">Forgot Password?</a>
+        <a href="/resetPassword" className="login-forgot-password">
+          Forgot Password?
+        </a>
       </div>
       <button type="submit" className="login-submit-button">
         Log In

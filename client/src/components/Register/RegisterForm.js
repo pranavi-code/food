@@ -1,41 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      // Send POST request to the backend
-      const response = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
+      const response = await axios.post('http://localhost:5000/api/auth/register', formData, {
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
+          'Content-Type': 'application/json'
+        }
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Store the token and role in localStorage
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', 'user'); // Default role is user
-
-        // Redirect to the user home page
-        navigate('/home');
-      } else {
-        alert(data.message || 'Registration failed. Please try again.');
+      if (response.status === 201) {
+        alert('Registration successful!');
+        navigate('/login');
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      alert('Something went wrong. Please try again later.');
+      console.error('Registration error:', error);
+      alert(error.response?.data?.message || 'Registration failed');
     }
   };
 
@@ -45,10 +42,11 @@ const RegisterForm = () => {
         <i className="fas fa-user"></i>
         <input
           type="text"
-          id="username"
           name="username"
           className="register-input"
           placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
           required
         />
       </div>
@@ -56,10 +54,11 @@ const RegisterForm = () => {
         <i className="fas fa-envelope"></i>
         <input
           type="email"
-          id="email"
           name="email"
           className="register-input"
           placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
           required
         />
       </div>
@@ -67,10 +66,11 @@ const RegisterForm = () => {
         <i className="fas fa-lock"></i>
         <input
           type="password"
-          id="password"
           name="password"
           className="register-input"
           placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
           required
         />
       </div>

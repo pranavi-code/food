@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import dessert from "../images/dessert.jpg";
 import healthy from "../images/healthy.jpg";
 import homeImg from "../images/home.jpg";
@@ -11,6 +11,18 @@ import recipe3 from "../images/recipe3.jpg";
 import vegan from "../images/vegan.jpg";
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // Clear all auth-related items from localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("username");
+        
+        // Redirect to login page
+        navigate("/login");
+    };
+
     return (
         <>
             {/* Navbar */}
@@ -40,6 +52,14 @@ const Home = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/contact">Contact Us</a>
+                            </li>
+                            <li className="nav-item">
+                                <button 
+                                    className="btn btn-view nav-link" 
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
                             </li>
                         </ul>
                         <form className="d-flex ms-3">

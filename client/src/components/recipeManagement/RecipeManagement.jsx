@@ -42,7 +42,7 @@ const RecipeManagement = () => {
 
     // Handle recipe deletion
     const deleteRecipe = (index) => {
-        if (confirm("Are you sure you want to delete this recipe?")) {
+        if (window.confirm("Are you sure you want to delete this recipe?")) {
             const updatedRecipes = recipes.filter((_, i) => i !== index);
             setRecipes(updatedRecipes);
         }
