@@ -1,31 +1,24 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
 import "./RecipeSearch.css";
 
-// Spoonacular API key and base URL
 const API_KEY = "d27e691f24ef40b7b63bfc091167f8fe";
 const API_URL = "https://api.spoonacular.com/recipes/complexSearch";
 const RECIPE_DETAILS_URL = "https://api.spoonacular.com/recipes";
 
 const RecipeSearch = () => {
-    const [query, setQuery] = useState("");
-    const [recipes, setRecipes] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
     const handleSearch = async (event) => {
         event.preventDefault();
-
-        if (!query.trim()) {
-            alert("Please enter a search term.");
-            return;
-        }
+        if (!searchQuery.trim()) return;
 
         try {
-            const response = await fetch(`${API_URL}?query=${query}&apiKey=${API_KEY}&number=6`);
+            const response = await fetch(`${API_URL}?query=${searchQuery}&apiKey=${API_KEY}`);
             const data = await response.json();
-            setRecipes(data.results || []);
+            setSearchResults(data.results || []);
         } catch (error) {
             console.error("Error fetching recipes:", error);
             alert("Failed to fetch recipes. Please try again.");
@@ -45,83 +38,142 @@ const RecipeSearch = () => {
     };
 
     return (
-        <div className="container mt-5">
-            {/* Search Bar */}
-            <div className="row justify-content-center mb-4">
-                <div className="col-md-6">
-                    <form onSubmit={handleSearch} className="d-flex">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search recipes..."
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                        />
-                        <button className="btn btn-primary ms-2" type="submit">Search</button>
-                    </form>
+        <div className="recipe-search">
+            {/* Navbar */}
+            <nav className="navbar rs-navbar navbar-expand-lg fixed-top">
+                <div className="container-fluid">
+                    <a className="navbar-brand rs-navbar-brand" href="/home">
+                        Culinary Quest
+                    </a>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav rs-navbar-nav me-auto">
+                            <li className="nav-item">
+                                <a className="nav-link rs-nav-link" href="/recipeSearch">
+                                    Recipes
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link rs-nav-link" href="#categories-section">
+                                    Categories
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link rs-nav-link" href="/MyAccount">
+                                    My Account
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link rs-nav-link" href="/contact">
+                                    Contact Us
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </nav>
+
+            {/* Header */}
+            <header className="header rs-header">
+                <h3>Discover Culinary Delights</h3>
+                <p>Explore recipes from around the world. Search by name, ingredient, or cuisine!</p>
+            </header>
+
+            {/* Search Bar */}
+            <form className="search-form" onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    className="form-control rs-form-control"
+                    placeholder="Search for recipes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="btn rs-btn-search">
+                    Search
+                </button>
+            </form>
 
             {/* Search Results */}
-            {recipes.length > 0 && (
-                <div className="row">
-                    {recipes.map((recipe) => (
-                        <div key={recipe.id} className="col-md-4 mb-4">
-                            <div className="card">
-                                <img
-                                    src={recipe.image}
-                                    className="card-img-top"
-                                    alt={recipe.title}
-                                />
-                                <div className="card-body">
-                                    <h5 className="card-title">{recipe.title}</h5>
-                                    <button
-                                        className="btn btn-info"
-                                        onClick={() => handleViewRecipe(recipe.id)}
-                                    >
+            <div className="search-results container">
+                {searchResults.length > 0 ? (
+                    <div className="row">
+                        {searchResults.map((recipe) => (
+                            <div key={recipe.id} className="col-lg-4 col-md-6 col-sm-12">
+                                <div className="recipe-card">
+                                    <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+                                    <h4>{recipe.title}</h4>
+                                    <button className="btn btn-view" onClick={() => handleViewRecipe(recipe.id)}>
                                         View Recipe
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+                        ))}
+                    </div>
+                ) : (
+                    <p className="no-results text-center">No recipes found. Try searching for something else!</p>
+                )}
+            </div>
 
-            {/* No results message */}
-            {recipes.length === 0 && query && (
-                <div className="alert alert-warning mt-4" role="alert">
-                    No recipes found. Try a different search.
-                </div>
-            )}
-
-            {/* Modal for Recipe Details */}
-            {selectedRecipe && (
-                <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-                    <Modal.Header closeButton>
-                        <Modal.Title>{selectedRecipe.title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <img
-                            src={selectedRecipe.image}
-                            alt={selectedRecipe.title}
-                            className="img-fluid mb-3"
-                        />
-                        <p><strong>Servings:</strong> {selectedRecipe.servings}</p>
-                        <p><strong>Preparation Time:</strong> {selectedRecipe.readyInMinutes} minutes</p>
-                        <p><strong>Ingredients:</strong></p>
-                        <ul>
-                            {selectedRecipe.extendedIngredients.map((ingredient) => (
-                                <li key={ingredient.id}>{ingredient.original}</li>
-                            ))}
-                        </ul>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
-                            Close
+            {/* Recipe Modal */}
+            {showModal && selectedRecipe && (
+                <div className="modal-overlay" onClick={() => setShowModal(false)}>
+                    <div
+                        className="modal-content"
+                        style={{
+                            maxHeight: "80vh", // Limit height to 80% of viewport
+                            overflowY: "auto", // Add vertical scrolling
+                            textAlign: "left",
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            className="modal-close"
+                            onClick={() => setShowModal(false)}
+                            style={{
+                                color: "#000", // Black text
+                                background: "none",
+                                border: "none",
+                                fontSize: "1.5rem",
+                                cursor: "pointer",
+                            }}
+                        >
+                            &times;
                         </button>
-                    </Modal.Footer>
-                </Modal>
+                        {/* Text Section */}
+                        <div className="modal-details" style={{ color: "#000" }}> {/* Black text */}
+                            <h2>{selectedRecipe.title}</h2>
+                            <p>
+                                <strong>Servings:</strong> {selectedRecipe.servings}
+                            </p>
+                            <p>
+                                <strong>Preparation Time:</strong> {selectedRecipe.readyInMinutes} minutes
+                            </p>
+                            <h3>Ingredients</h3>
+                            <ul>
+                                {selectedRecipe.extendedIngredients.map((ingredient) => (
+                                    <li key={ingredient.id}>{ingredient.original}</li>
+                                ))}
+                            </ul>
+                            {selectedRecipe.analyzedInstructions?.length > 0 && (
+                                <>
+                                    <h3>Instructions</h3>
+                                    <ol>
+                                        {selectedRecipe.analyzedInstructions[0].steps.map((step) => (
+                                            <li key={step.number}>{step.step}</li>
+                                        ))}
+                                    </ol>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
