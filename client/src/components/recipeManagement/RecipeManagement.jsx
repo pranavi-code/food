@@ -1,95 +1,49 @@
 import React, { useState } from 'react';
 import './RecipeManagement.css';
+import axios from 'axios';  // Add axios to send HTTP requests
 
 const RecipeManagement = () => {
-    // State to manage recipes
     const [recipes, setRecipes] = useState([]);
     const [newRecipe, setNewRecipe] = useState({
         name: '',
         ingredients: '',
         steps: '',
         category: 'Italian',
-        image: null,
     });
 
-    // Handle logout functionality
     const logout = () => {
         sessionStorage.removeItem('authToken');
         localStorage.removeItem('authToken');
         window.location.href = "landing.html";
     };
 
-    // Handle recipe approval
-    const approveRecipe = (index) => {
-        const updatedRecipes = [...recipes];
-        updatedRecipes[index].status = 'Approved';
-        setRecipes(updatedRecipes);
-    };
-
-    // Handle recipe rejection
-    const rejectRecipe = (index) => {
-        const updatedRecipes = [...recipes];
-        updatedRecipes[index].status = 'Rejected';
-        setRecipes(updatedRecipes);
-    };
-
-    // Handle recipe editing
-    const editRecipe = (index) => {
-        const recipe = recipes[index];
-        alert(`Editing Recipe: ${recipe.name}`);
-        // Implement editing logic here
-    };
-
-    // Handle recipe deletion
-    const deleteRecipe = (index) => {
-        if (window.confirm("Are you sure you want to delete this recipe?")) {
-            const updatedRecipes = recipes.filter((_, i) => i !== index);
-            setRecipes(updatedRecipes);
-        }
-    };
-
-    // Handle search functionality
-    const filterRecipes = () => {
-        let searchTerm = document.getElementById('recipeSearch').value.toLowerCase();
-        let rows = document.querySelectorAll('.recipe-management-table tbody tr');
-        rows.forEach(row => {
-            let name = row.cells[0].innerText.toLowerCase();
-            let ingredients = row.cells[1]?.innerText.toLowerCase();
-            if (name.includes(searchTerm) || ingredients?.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    };
-
-    // Handle recipe addition
-    const handleAddRecipe = (e) => {
+    // Add recipe to the backend
+    const handleAddRecipe = async (e) => {
         e.preventDefault();
-        
-        const recipeToAdd = {
-            ...newRecipe,
-            status: 'Pending',
-            submittedBy: 'Admin', // Placeholder for the submitted by field
-        };
 
-        // Update recipes state
-        setRecipes([...recipes, recipeToAdd]);
-        alert("Recipe added successfully!");
+        try {
+            // Send POST request to the backend
+            const response = await axios.post('http://localhost:5000/api/recipes', newRecipe);
+            alert("Recipe added successfully!");
 
-        // Manually hide the modal
-        const modal = document.getElementById('addRecipeModal');
-        const bootstrapModal = new window.bootstrap.Modal(modal);
-        bootstrapModal.hide(); // Hides the modal
+            // Update the recipes state
+            setRecipes((prevRecipes) => [...prevRecipes, response.data]);
 
-        // Reset the form
-        setNewRecipe({
-            name: '',
-            ingredients: '',
-            steps: '',
-            category: 'Italian',
-            image: null,
-        });
+            // Hide modal and reset form
+            const modal = document.getElementById('addRecipeModal');
+            const bootstrapModal = new window.bootstrap.Modal(modal);
+            bootstrapModal.hide(); // Hides the modal
+
+            setNewRecipe({
+                name: '',
+                ingredients: '',
+                steps: '',
+                category: 'Italian',
+            });
+        } catch (error) {
+            console.error("Error adding recipe:", error);
+            alert("Failed to add recipe.");
+        }
     };
 
     // Handle form input changes
@@ -98,14 +52,6 @@ const RecipeManagement = () => {
         setNewRecipe((prev) => ({
             ...prev,
             [name]: value,
-        }));
-    };
-
-    // Handle file input change
-    const handleFileChange = (e) => {
-        setNewRecipe((prev) => ({
-            ...prev,
-            image: e.target.files[0],
         }));
     };
 
@@ -136,11 +82,6 @@ const RecipeManagement = () => {
                     <h2>Recipe Management</h2>
                 </div>
 
-                {/* Search Bar */}
-                <div className="mb-4">
-                    <input type="text" className="form-control" id="recipeSearch" placeholder="Search recipes by name or ingredients" onKeyUp={filterRecipes} />
-                </div>
-
                 {/* Recipe Table */}
                 <div className="card mb-4">
                     <div className="card-header">Recipe List</div>
@@ -164,10 +105,10 @@ const RecipeManagement = () => {
                                             <td>{recipe.category}</td>
                                             <td><span className={`badge bg-${recipe.status === 'Approved' ? 'success' : recipe.status === 'Rejected' ? 'danger' : 'warning'}`}>{recipe.status}</span></td>
                                             <td>
-                                                <button className="btn btn-success" onClick={() => approveRecipe(index)}>Approve</button>
-                                                <button className="btn btn-danger" onClick={() => rejectRecipe(index)}>Reject</button>
-                                                <button className="btn btn-warning" onClick={() => editRecipe(index)}>Edit</button>
-                                                <button className="btn btn-secondary" onClick={() => deleteRecipe(index)}>Delete</button>
+                                                <button className="btn btn-success">Approve</button>
+                                                <button className="btn btn-danger">Reject</button>
+                                                <button className="btn btn-warning">Edit</button>
+                                                <button className="btn btn-secondary">Delete</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -243,17 +184,7 @@ const RecipeManagement = () => {
                                             <option value="Dessert">Dessert</option>
                                         </select>
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="image" className="form-label">Upload Image</label>
-                                        <input 
-                                            type="file" 
-                                            className="form-control" 
-                                            id="image" 
-                                            name="image" 
-                                            accept="image/*" 
-                                            onChange={handleFileChange} 
-                                        />
-                                    </div>
+                                    
                                     <button type="submit" className="btn btn-primary">Add Recipe</button>
                                 </form>
                             </div>

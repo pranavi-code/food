@@ -17,7 +17,7 @@ app.use(express.json());
 // Routes
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/adminRoutes');
-const recipeRoutes = require('./routes/recipes');
+const recipeRoutes = require('./routes/recipesRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 
 // Connect to database
