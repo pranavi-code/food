@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [feedbackReports, setFeedbackReports] = useState(0); // State for feedback reports (dynamic)
   const [activeAlerts, setActiveAlerts] = useState(15); // Placeholder for active alerts
   const [recentFeedback, setRecentFeedback] = useState([]); // State for recent feedback
+  const [newUserRegistrations, setNewUserRegistrations] = useState(0); // State for new user registrations
 
   // Fetch total users and feedback data
   useEffect(() => {
@@ -70,10 +71,29 @@ const AdminDashboard = () => {
       }
     };
 
+    const fetchNewUserRegistrations = async () => {
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("authToken");
+        console.log("Token:", token); // Check if token is available
+    
+        if (!token) throw new Error("Authorization token missing.");
+    
+        const response = await axios.get("http://localhost:5000/api/admin/new-user-registrations", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+    
+        console.log("New User Registrations:", response.data); // Log the response data
+        setNewUserRegistrations(response.data.newUserRegistrations || 0);
+      } catch (error) {
+        console.error("Error fetching new user registrations:", error.message || error);
+      }
+    };
+
     // Fetch all data
     fetchTotalUsers();
     fetchTotalFeedback(); // Fetch total feedback count
     fetchRecentFeedback();
+    fetchNewUserRegistrations(); // Fetch new user registrations
   }, []);
 
   // Logout handler
@@ -140,9 +160,9 @@ const AdminDashboard = () => {
 
           <div className="col-md-4">
             <div className="admin-dashboard-card">
-              <div className="admin-dashboard-card-header">Active Alerts</div>
+              <div className="admin-dashboard-card-header">New User Registrations</div>
               <div className="admin-dashboard-card-body">
-                <p>{activeAlerts}</p>
+                <p>{newUserRegistrations}</p> {/* Display new user registrations count */}
               </div>
             </div>
           </div>

@@ -19,7 +19,21 @@ router.get("/api/admin/total-feedback", async (req, res) => {
       res.status(500).json({ message: "Error fetching total feedback count" });
     }
   });
+  router.get('/new-user-registrations', async (req, res) => {
+    try {
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0); // Set to the start of the day (midnight)
 
+        const newUserCount = await User.countDocuments({
+            createdAt: { $gte: startOfDay }
+        });
+
+        res.json({ newUserRegistrations: newUserCount });
+    } catch (error) {
+        console.error("Error fetching new user registrations:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 // Fetch Total Users
 router.get('/total-users', async (req, res) => {
     try {
