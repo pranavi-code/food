@@ -1,10 +1,9 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const VeganPancakesDetails = () => {
   return (
     <div>
-      <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
+        <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
         <div className="container-fluid">
           <a className="recipe-navbar-brand" href="/home">
             Culinary Quest
@@ -43,70 +42,50 @@ const RecipeDetails = () => {
           </div>
         </div>
       </nav>
-
-      {/* Hero Section */}
+      {/* Similar Navbar */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Delicious Recipe: Vegan Pancakes</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          Fluffy and delicious pancakes made with simple vegan ingredients.
         </p>
       </section>
 
-      {/* Recipe Details Section */}
       <section className="recipe-details container">
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Pancake Lover
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 22nd December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 5 minutes | <strong>Cook Time:</strong> 10 minutes | <strong>Serving Size:</strong> 4 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 cup All-purpose flour</li>
+          <li>1 tbsp Baking powder</li>
+          <li>1/4 tsp Salt</li>
+          <li>1 tbsp Sugar</li>
+          <li>1 cup Plant-based milk (e.g., almond, soy)</li>
+          <li>1 tbsp Vegetable oil</li>
+          <li>1 tsp Vanilla extract</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>In a bowl, whisk together flour, baking powder, salt, and sugar.</li>
+          <li>In another bowl, mix plant-based milk, vegetable oil, and vanilla extract.</li>
+          <li>Combine wet and dry ingredients until just mixed (do not overmix).</li>
+          <li>Heat a skillet over medium heat and lightly grease with oil.</li>
+          <li>Pour 1/4 cup of batter onto the skillet for each pancake. Cook until bubbles form, flip, and cook until golden brown.</li>
+          <li>Serve with maple syrup or your favorite toppings.</li>
         </ol>
       </section>
 
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
       </footer>
@@ -114,4 +93,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default VeganPancakesDetails;

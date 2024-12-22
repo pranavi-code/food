@@ -1,9 +1,9 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const EggSaladSandwichDetails = () => {
   return (
     <div>
+      {/* Similar Navbar */}
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
         <div className="container-fluid">
           <a className="recipe-navbar-brand" href="/home">
@@ -43,70 +43,48 @@ const RecipeDetails = () => {
           </div>
         </div>
       </nav>
-
-      {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Quick Recipe: Egg Salad Sandwich</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A creamy and delicious egg salad sandwich perfect for lunch or a quick snack.
         </p>
       </section>
 
-      {/* Recipe Details Section */}
       <section className="recipe-details container">
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Chef Sunny Side
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 22nd December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 10 minutes | <strong>Serving Size:</strong> 1 sandwich
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>2 Hard-boiled eggs</li>
+          <li>2 tbsp Mayonnaise</li>
+          <li>1/2 tsp Mustard</li>
+          <li>1 tbsp Green onions, chopped</li>
+          <li>Salt and pepper to taste</li>
+          <li>2 slices of Bread</li>
+          <li>Optional: Lettuce leaves</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Peel and mash hard-boiled eggs in a bowl.</li>
+          <li>Mix in mayonnaise, mustard, green onions, salt, and pepper.</li>
+          <li>Spread the egg salad onto one slice of bread.</li>
+          <li>Top with lettuce, if desired, and cover with the other slice of bread.</li>
+          <li>Cut in half and serve immediately.</li>
         </ol>
       </section>
 
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
       </footer>
@@ -114,4 +92,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default EggSaladSandwichDetails;

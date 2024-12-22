@@ -1,7 +1,6 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const GrilledChickenSaladDetails = () => {
   return (
     <div>
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
@@ -43,13 +42,12 @@ const RecipeDetails = () => {
           </div>
         </div>
       </nav>
-
+      {/* Similar Navbar */}
       {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Healthy Recipe: Grilled Chicken Salad</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A delicious grilled chicken salad with fresh greens and a tangy dressing.
         </p>
       </section>
 
@@ -58,55 +56,40 @@ const RecipeDetails = () => {
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Martha Stewart
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 14th December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 15 minutes | <strong>Cook Time:</strong> 10 minutes | <strong>Serving Size:</strong> 2 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>2 Chicken breasts</li>
+          <li>2 cups Mixed greens</li>
+          <li>1/2 cup Cherry tomatoes, halved</li>
+          <li>1/4 cup Red onion, sliced</li>
+          <li>1/4 cup Feta cheese, crumbled</li>
+          <li>2 tbsp Olive oil</li>
+          <li>2 tbsp Lemon juice</li>
+          <li>1 tsp Garlic powder</li>
+          <li>1 tsp Salt</li>
+          <li>1/2 tsp Black pepper</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Season chicken breasts with garlic powder, salt, and pepper.</li>
+          <li>Grill chicken on medium heat until fully cooked (about 5 minutes per side).</li>
+          <li>Let the chicken rest for 5 minutes before slicing.</li>
+          <li>In a large bowl, combine mixed greens, tomatoes, red onion, and feta cheese.</li>
+          <li>Top with grilled chicken slices.</li>
+          <li>Drizzle with olive oil and lemon juice. Toss lightly and serve immediately.</li>
         </ol>
       </section>
-
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
       </footer>
@@ -114,4 +97,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default GrilledChickenSaladDetails;

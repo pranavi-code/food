@@ -1,10 +1,9 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const TofuStirFryDetails = () => {
   return (
     <div>
-      <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
+        <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
         <div className="container-fluid">
           <a className="recipe-navbar-brand" href="/home">
             Culinary Quest
@@ -43,70 +42,52 @@ const RecipeDetails = () => {
           </div>
         </div>
       </nav>
-
-      {/* Hero Section */}
+      {/* Similar Navbar */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Quick Recipe: Tofu Stir Fry</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A flavorful stir fry with tofu and vibrant vegetables, perfect for a quick meal.
         </p>
       </section>
 
-      {/* Recipe Details Section */}
       <section className="recipe-details container">
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Vegan Chef
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 22nd December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 10 minutes | <strong>Cook Time:</strong> 15 minutes | <strong>Serving Size:</strong> 2 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 block Firm tofu, cubed</li>
+          <li>1 tbsp Soy sauce</li>
+          <li>1 tbsp Cornstarch</li>
+          <li>1 tbsp Sesame oil</li>
+          <li>1 cup Bell peppers, sliced</li>
+          <li>1 cup Broccoli florets</li>
+          <li>1 tsp Garlic, minced</li>
+          <li>1 tsp Ginger, minced</li>
+          <li>2 tbsp Soy sauce</li>
+          <li>1 tbsp Maple syrup</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Coat tofu cubes with soy sauce and cornstarch.</li>
+          <li>Heat sesame oil in a skillet and fry tofu until crispy. Remove and set aside.</li>
+          <li>Add garlic, ginger, bell peppers, and broccoli to the skillet. Stir fry for 5 minutes.</li>
+          <li>Return tofu to the skillet and add soy sauce and maple syrup. Cook for 2-3 minutes.</li>
+          <li>Serve hot with rice or noodles.</li>
         </ol>
       </section>
 
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
       </footer>
@@ -114,4 +95,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default TofuStirFryDetails;

@@ -1,7 +1,6 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const CheesecakeDetails = () => {
   return (
     <div>
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
@@ -46,10 +45,9 @@ const RecipeDetails = () => {
 
       {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Delicious Recipe: Classic Cheesecake</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          Learn how to make a creamy, decadent classic cheesecake with a graham cracker crust.
         </p>
       </section>
 
@@ -58,39 +56,44 @@ const RecipeDetails = () => {
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Emily Baker
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 20th December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 20 minutes | <strong>Cook Time:</strong> 1 hour | <strong>Chill Time:</strong> 4 hours | <strong>Serving Size:</strong> 8 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 and 1/2 cups Graham cracker crumbs</li>
+          <li>1/3 cup Granulated sugar</li>
+          <li>1/2 cup Unsalted butter, melted</li>
+          <li>4 packages (8 oz each) Cream cheese, softened</li>
+          <li>1 cup Granulated sugar</li>
+          <li>1 tsp Vanilla extract</li>
+          <li>4 Large eggs</li>
+          <li>1/3 cup Sour cream</li>
+          <li>1/4 cup All-purpose flour</li>
+          <li>Optional toppings: Fresh berries, whipped cream, or fruit syrup</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Preheat the oven to 325°F (165°C). Grease a 9-inch springform pan.</li>
+          <li>In a medium bowl, combine graham cracker crumbs, 1/3 cup sugar, and melted butter. Press the mixture firmly into the bottom of the prepared pan.</li>
+          <li>Bake the crust for 10 minutes, then set aside to cool.</li>
+          <li>In a large mixing bowl, beat the cream cheese and 1 cup of sugar until smooth and creamy.</li>
+          <li>Add in the vanilla extract and sour cream. Mix until combined.</li>
+          <li>One at a time, beat in the eggs at low speed until just blended. Do not overmix.</li>
+          <li>Gently fold in the flour until incorporated.</li>
+          <li>Pour the batter over the crust. Smooth the top with a spatula.</li>
+          <li>Bake the cheesecake for 50-60 minutes, or until the edges are set and the center is slightly jiggly.</li>
+          <li>Turn off the oven and let the cheesecake cool in the oven for 1 hour with the door ajar to prevent cracking.</li>
+          <li>Refrigerate the cheesecake for at least 4 hours (preferably overnight) before serving.</li>
+          <li>Top with your favorite toppings and enjoy!</li>
         </ol>
       </section>
 
@@ -103,9 +106,7 @@ const RecipeDetails = () => {
           <i className="fab fa-pinterest"></i>
         </div>
       </section>
-
       
-
       {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
@@ -114,4 +115,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default CheesecakeDetails;

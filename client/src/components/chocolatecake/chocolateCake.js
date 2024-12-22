@@ -1,7 +1,6 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const ChocolateCakeDetails = () => {
   return (
     <div>
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
@@ -46,10 +45,9 @@ const RecipeDetails = () => {
 
       {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Delicious Recipe: Chocolate Cake</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          Indulge in the richness of homemade chocolate cake with this simple recipe.
         </p>
       </section>
 
@@ -58,39 +56,40 @@ const RecipeDetails = () => {
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Jane Doe
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 15th November, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 15 minutes | <strong>Cook Time:</strong> 35 minutes | <strong>Serving Size:</strong> 8 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 and 3/4 cups All-purpose flour</li>
+          <li>3/4 cup Cocoa powder</li>
+          <li>2 cups Sugar</li>
+          <li>1 and 1/2 tsp Baking soda</li>
+          <li>1 and 1/2 tsp Baking powder</li>
+          <li>1 tsp Salt</li>
+          <li>2 Eggs</li>
+          <li>1 cup Whole milk</li>
+          <li>1/2 cup Vegetable oil</li>
+          <li>2 tsp Vanilla extract</li>
+          <li>1 cup Boiling water</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Preheat the oven to 350°F (175°C) and grease a 9-inch round baking pan.</li>
+          <li>In a large bowl, mix flour, cocoa powder, sugar, baking soda, baking powder, and salt.</li>
+          <li>Add eggs, milk, oil, and vanilla extract. Beat on medium speed until smooth.</li>
+          <li>Stir in boiling water (batter will be thin).</li>
+          <li>Pour batter into the prepared pan and bake for 30-35 minutes, or until a toothpick comes out clean.</li>
+          <li>Cool the cake in the pan for 10 minutes, then remove it to a wire rack to cool completely.</li>
+          <li>Frost as desired and serve!</li>
         </ol>
       </section>
 
@@ -103,9 +102,6 @@ const RecipeDetails = () => {
           <i className="fab fa-pinterest"></i>
         </div>
       </section>
-
-      
-
       {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
@@ -114,4 +110,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default ChocolateCakeDetails;

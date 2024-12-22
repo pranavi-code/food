@@ -1,9 +1,9 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const StirFryDetails = () => {
   return (
     <div>
+      {/* Similar Navbar */}
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
         <div className="container-fluid">
           <a className="recipe-navbar-brand" href="/home">
@@ -43,70 +43,51 @@ const RecipeDetails = () => {
           </div>
         </div>
       </nav>
-
-      {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Quick Recipe: 15-Minute Stir Fry</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A fast and flavorful stir fry loaded with fresh vegetables and your choice of protein.
         </p>
       </section>
 
-      {/* Recipe Details Section */}
       <section className="recipe-details container">
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Wok King
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 21st December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 5 minutes | <strong>Cook Time:</strong> 10 minutes | <strong>Serving Size:</strong> 2 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 tbsp Vegetable oil</li>
+          <li>1 cup Broccoli florets</li>
+          <li>1 cup Bell peppers, sliced</li>
+          <li>1/2 cup Carrots, julienned</li>
+          <li>1/2 cup Protein (e.g., chicken, tofu, shrimp)</li>
+          <li>2 tbsp Soy sauce</li>
+          <li>1 tbsp Sesame oil</li>
+          <li>1 tsp Garlic, minced</li>
+          <li>1 tsp Ginger, minced</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Heat vegetable oil in a wok or skillet over medium-high heat.</li>
+          <li>Add garlic and ginger, sauté until fragrant.</li>
+          <li>Add protein and cook until browned and cooked through.</li>
+          <li>Add vegetables and stir fry for 5-7 minutes.</li>
+          <li>Stir in soy sauce and sesame oil. Cook for an additional 2 minutes.</li>
+          <li>Serve hot over rice or noodles.</li>
         </ol>
       </section>
 
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
       </footer>
@@ -114,4 +95,5 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default StirFryDetails;
+    

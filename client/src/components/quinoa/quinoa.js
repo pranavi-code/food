@@ -1,7 +1,6 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const QuinoaSaladDetails = () => {
   return (
     <div>
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
@@ -46,10 +45,9 @@ const RecipeDetails = () => {
 
       {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Healthy Recipe: Quinoa Salad</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A nutritious and vibrant quinoa salad packed with fresh vegetables and zesty flavors.
         </p>
       </section>
 
@@ -58,53 +56,40 @@ const RecipeDetails = () => {
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Jamie Oliver
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 10th December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 20 minutes | <strong>Serving Size:</strong> 4 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 cup Quinoa</li>
+          <li>2 cups Water</li>
+          <li>1 cup Cherry tomatoes, halved</li>
+          <li>1 cup Cucumber, diced</li>
+          <li>1/2 cup Red onion, finely chopped</li>
+          <li>1/2 cup Fresh parsley, chopped</li>
+          <li>1/4 cup Olive oil</li>
+          <li>2 tbsp Lemon juice</li>
+          <li>1 tsp Salt</li>
+          <li>1/2 tsp Black pepper</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Rinse quinoa under cold water. In a pot, combine quinoa and water, bring to a boil, then simmer until water is absorbed (about 15 minutes).</li>
+          <li>Let quinoa cool completely.</li>
+          <li>In a large bowl, combine cooked quinoa, tomatoes, cucumber, red onion, and parsley.</li>
+          <li>In a small bowl, whisk together olive oil, lemon juice, salt, and pepper.</li>
+          <li>Pour dressing over the quinoa mixture and toss well to combine.</li>
+          <li>Chill in the fridge for 30 minutes before serving.</li>
         </ol>
       </section>
-
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
 
       {/* Footer */}
       <footer className="recipe-footer">
@@ -114,4 +99,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default QuinoaSaladDetails;

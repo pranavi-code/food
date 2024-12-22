@@ -130,7 +130,9 @@ const Home = () => {
                             <div className="card">
                                 <img src={dessert} className="card-img-top" alt="Desserts"/>
                                 <div className="card-body text-center">
-                                <button className="btn btn-view">Desserts</button>
+                                <Link to="/Desserts">
+                <button className="btn btn-view">Dessets</button>
+            </Link>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +140,9 @@ const Home = () => {
                             <div className="card">
                                 <img src={vegan} className="card-img-top" alt="Vegan"/>
                                 <div className="card-body text-center">
-                                <button className="btn btn-view">Vegan</button>
+                                <Link to="/vegan">
+                <button className="btn btn-view">Vegan</button>
+            </Link>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +150,9 @@ const Home = () => {
                             <div className="card">
                                 <img src={quickMeal} className="card-img-top" alt="Quick Meals"/>
                                 <div className="card-body text-center">
-                                <button className="btn btn-view">Quick Meals</button>
+                                <Link to="/quickmeals">
+                <button className="btn btn-view">Quick Meals</button>
+            </Link>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +160,9 @@ const Home = () => {
                             <div className="card">
                                 <img src={healthy} className="card-img-top" alt="Healthy"/>
                                 <div className="card-body text-center">
-                                <button className="btn btn-view">Healthy</button>
+                                <Link to="/healthy">
+                <button className="btn btn-view">Healthy</button>
+            </Link>
                                 </div>
                             </div>
                         </div>

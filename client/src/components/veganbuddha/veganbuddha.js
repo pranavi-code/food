@@ -1,7 +1,6 @@
 import React from "react";
-import "./RecipeDetails.css";
 
-const RecipeDetails = () => {
+const VeganBuddhaBowlDetails = () => {
   return (
     <div>
       <nav className="recipe-navbar navbar navbar-expand-lg fixed-top">
@@ -46,10 +45,9 @@ const RecipeDetails = () => {
 
       {/* Hero Section */}
       <section className="recipe-hero-section">
-        <h1>Delicious Recipe: Spaghetti Bolognese</h1>
+        <h1>Healthy Recipe: Vegan Buddha Bowl</h1>
         <p>
-          Learn how to make the perfect spaghetti bolognese with our detailed
-          step-by-step guide.
+          A nutrient-packed bowl filled with fresh vegetables, grains, and a delicious tahini dressing.
         </p>
       </section>
 
@@ -58,53 +56,38 @@ const RecipeDetails = () => {
         <h2>Recipe Information</h2>
         <div className="recipe-info">
           <p>
-            <strong>Author:</strong> John Doe
+            <strong>Author:</strong> Plant Lover
           </p>
           <p>
-            <strong>Date Posted:</strong> 12th November, 2024
+            <strong>Date Posted:</strong> 22nd December, 2024
           </p>
           <p>
-            <strong>Prep Time:</strong> 30 minutes | <strong>Cook Time:</strong>{" "}
-            45 minutes | <strong>Serving Size:</strong> 4 servings
+            <strong>Prep Time:</strong> 10 minutes | <strong>Cook Time:</strong> 15 minutes | <strong>Serving Size:</strong> 2 servings
           </p>
         </div>
 
         <h3>Ingredients:</h3>
         <ul className="recipe-ingredients">
-          <li>200g Spaghetti</li>
-          <li>300g Ground beef</li>
-          <li>1 Onion, chopped</li>
-          <li>2 cloves Garlic, minced</li>
-          <li>1 can Tomato paste</li>
-          <li>1 tbsp Olive oil</li>
-          <li>1 tsp Oregano</li>
-          <li>Salt & Pepper to taste</li>
+          <li>1 cup Cooked quinoa or rice</li>
+          <li>1 cup Roasted sweet potatoes</li>
+          <li>1/2 cup Steamed broccoli</li>
+          <li>1/2 cup Chickpeas</li>
+          <li>1/4 cup Sliced cucumbers</li>
+          <li>1/4 cup Sliced avocado</li>
+          <li>2 tbsp Tahini</li>
+          <li>1 tbsp Lemon juice</li>
+          <li>1 tsp Maple syrup</li>
+          <li>Salt and pepper to taste</li>
         </ul>
 
         <h3>Steps:</h3>
         <ol className="recipe-steps">
-          <li>Boil the spaghetti according to the package instructions.</li>
-          <li>In a pan, heat olive oil and sauté the onions and garlic until soft.</li>
-          <li>Add the ground beef and cook until browned.</li>
-          <li>
-            Stir in the tomato paste, oregano, salt, and pepper, and simmer for
-            20 minutes.
-          </li>
-          <li>Serve the sauce over the spaghetti and enjoy!</li>
+          <li>Layer quinoa or rice in a bowl as the base.</li>
+          <li>Add roasted sweet potatoes, steamed broccoli, chickpeas, cucumbers, and avocado.</li>
+          <li>In a small bowl, whisk together tahini, lemon juice, maple syrup, salt, and pepper.</li>
+          <li>Drizzle the dressing over the bowl and serve immediately.</li>
         </ol>
       </section>
-
-      {/* Share Section */}
-      <section className="recipe-share-section container">
-        <h4>Share This Recipe</h4>
-        <div className="recipe-share-buttons">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
-          <i className="fab fa-pinterest"></i>
-        </div>
-      </section>
-
-      
 
       {/* Footer */}
       <footer className="recipe-footer">
@@ -114,4 +97,4 @@ const RecipeDetails = () => {
   );
 };
 
-export default RecipeDetails;
+export default VeganBuddhaBowlDetails;
