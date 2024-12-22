@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spoonacular API Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    .recipe {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .recipe img {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Spoonacular API Test</h1>
+  <form id="recipeForm">
+    <label for="query">Search for a recipe:</label>
+    <input type="text" id="query" name="query" required>
+    <button type="submit">Search</button>
+  </form>
+  <div id="results"></div>
+
+  <script>
+    const apiKey = "d27e691f24ef40b7b63bfc091167f8fe";
+    const apiUrl = "https://api.spoonacular.com/recipes/complexSearch";
+    const recipeDetailsUrl = "https://api.spoonacular.com/recipes";
+
+    document.getElementById('recipeForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const query = document.getElementById('query').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = "Loading...";
+
+      try {
+        // Fetch recipes based on query
+        const response = await fetch(`${apiUrl}?query=${query}&apiKey=${apiKey}`);
+        const data = await response.json();
+        
+        if (data.results && data.results.length > 0) {
+          resultsDiv.innerHTML = "";
+
+          for (const recipe of data.results) {
+            // Fetch detailed information for each recipe
+            const detailsResponse = await fetch(`${recipeDetailsUrl}/${recipe.id}/information?apiKey=${apiKey}`);
+            const details = await detailsResponse.json();
+
+            // Append recipe information to results
+            const recipeDiv = document.createElement("div");
+            recipeDiv.classList.add("recipe");
+            recipeDiv.innerHTML = `
+              <h3>${details.title}</h3>
+              ${details.image ? `<img src="${details.image}" alt="${details.title}" width="100">` : ""}
+              <p><strong>Servings:</strong> ${details.servings}</p>
+              <p><strong>Preparation Time:</strong> ${details.readyInMinutes} minutes</p>
+              <p><strong>Ingredients:</strong></p>
+              <ul>
+                ${details.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join("")}
+              </ul>
+            `;
+            resultsDiv.appendChild(recipeDiv);
+          }
+        } else {
+          resultsDiv.innerHTML = "<p>No recipes found.</p>";
+        }
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+        resultsDiv.innerHTML = "<p>There was an error fetching recipes. Please try again later.</p>";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Home.css";
 import { Link, useNavigate } from 'react-router-dom';
 import dessert from "../images/dessert.jpg";
 import healthy from "../images/healthy.jpg";
@@ -9,6 +8,7 @@ import recipe1 from "../images/recipe1.jpg";
 import recipe2 from "../images/recipe2.jpg";
 import recipe3 from "../images/recipe3.jpg";
 import vegan from "../images/vegan.jpg";
+import "./Home.css";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -62,17 +62,6 @@ const Home = () => {
                                 </button>
                             </li>
                         </ul>
-                        <form className="d-flex ms-3">
-                            <input
-                                className="form-control me-2"
-                                type="search"
-                                placeholder="Search recipes..."
-                                aria-label="Search"
-                            />
-                            <button className="btn btn-search" type="submit">
-                                Search
-                            </button>
-                        </form>
                     </div>
                 </div>
             </nav>
@@ -85,7 +74,6 @@ const Home = () => {
                 <div className="hero-overlay"></div>
                 <h1>Welcome to Culinary Quest</h1>
                 <p>Discover, create, and share your favorite recipes from around the globe.</p>
-                <button className="btn btn-view mt-3">Explore Recipes</button>
             </section>
 
             {/* Featured Recipes Section */}
@@ -109,9 +97,11 @@ const Home = () => {
                             <div className="card">
                                 <img src={recipe2} className="card-img-top" alt="Recipe 2"/>
                                 <div className="card-body">
-                                    <h5 className="card-title">Recipe Title 2</h5>
+                                    <h5 className="card-title">Banana Pancake</h5>
                                     <p className="card-text">Prep Time: 20 min | Rating: ★★★★★</p>
-                                    <button className="btn btn-view">View Recipe</button>
+                                    <Link to="/banana">
+                <button className="btn btn-view">View Recipe</button>
+            </Link>
                                 </div>
                             </div>
                         </div>
@@ -119,9 +109,11 @@ const Home = () => {
                             <div className="card">
                                 <img src={recipe3} className="card-img-top" alt="Recipe 3"/>
                                 <div className="card-body">
-                                    <h5 className="card-title">Recipe Title 3</h5>
-                                    <p className="card-text">Prep Time: 25 min | Rating: ★★★★☆</p>
-                                    <button className="btn btn-view">View Recipe</button>
+                                    <h5 className="card-title">Chicken Biryani</h5>
+                                    <p className="card-text">Prep Time: 45 min | Rating: ★★★★☆</p>
+                                    <Link to="/biryani">
+                <button className="btn btn-view">View Recipe</button>
+            </Link>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +130,7 @@ const Home = () => {
                             <div className="card">
                                 <img src={dessert} className="card-img-top" alt="Desserts"/>
                                 <div className="card-body text-center">
-                                    <h5 className="card-title">Desserts</h5>
+                                <button className="btn btn-view">Desserts</button>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +138,7 @@ const Home = () => {
                             <div className="card">
                                 <img src={vegan} className="card-img-top" alt="Vegan"/>
                                 <div className="card-body text-center">
-                                    <h5 className="card-title">Vegan</h5>
+                                <button className="btn btn-view">Vegan</button>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +146,7 @@ const Home = () => {
                             <div className="card">
                                 <img src={quickMeal} className="card-img-top" alt="Quick Meals"/>
                                 <div className="card-body text-center">
-                                    <h5 className="card-title">Quick Meals</h5>
+                                <button className="btn btn-view">Quick Meals</button>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +154,7 @@ const Home = () => {
                             <div className="card">
                                 <img src={healthy} className="card-img-top" alt="Healthy"/>
                                 <div className="card-body text-center">
-                                    <h5 className="card-title">Healthy</h5>
+                                <button className="btn btn-view">Healthy</button>
                                 </div>
                             </div>
                         </div>

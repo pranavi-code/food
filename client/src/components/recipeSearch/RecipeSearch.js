@@ -1,39 +1,21 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import "./RecipeSearch.css";
+
+// Spoonacular API key and base URL
+const API_KEY = "d27e691f24ef40b7b63bfc091167f8fe";
+const API_URL = "https://api.spoonacular.com/recipes/complexSearch";
+const RECIPE_DETAILS_URL = "https://api.spoonacular.com/recipes";
 
 const RecipeSearch = () => {
     const [query, setQuery] = useState("");
-    const [searchPerformed, setSearchPerformed] = useState(false);
     const [recipes, setRecipes] = useState([]);
-
-    // Sample recipe data for initial display
-    const sampleRecipes = [
-        {
-            id: 1,
-            title: "Italian Pasta Carbonara",
-            prepTime: "30 min",
-            rating: "★★★★☆",
-            image: "https://via.placeholder.com/300"
-        },
-        {
-            id: 2,
-            title: "Asian Stir-Fry Noodles",
-            prepTime: "20 min",
-            rating: "★★★★★",
-            image: "https://via.placeholder.com/300"
-        },
-        {
-            id: 3,
-            title: "Mediterranean Salad",
-            prepTime: "15 min",
-            rating: "★★★★☆",
-            image: "https://via.placeholder.com/300"
-        }
-    ];
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const handleSearch = async (event) => {
         event.preventDefault();
-        setSearchPerformed(true);
 
         if (!query.trim()) {
             alert("Please enter a search term.");
@@ -41,155 +23,106 @@ const RecipeSearch = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/recipes?query=${query}`);
+            const response = await fetch(`${API_URL}?query=${query}&apiKey=${API_KEY}&number=6`);
             const data = await response.json();
-            setRecipes(data);
+            setRecipes(data.results || []);
         } catch (error) {
             console.error("Error fetching recipes:", error);
-            setRecipes([]);
+            alert("Failed to fetch recipes. Please try again.");
         }
     };
 
-    // Display recipes based on search status
-    const displayRecipes = searchPerformed ? recipes : sampleRecipes;
+    const handleViewRecipe = async (id) => {
+        try {
+            const response = await fetch(`${RECIPE_DETAILS_URL}/${id}/information?apiKey=${API_KEY}`);
+            const data = await response.json();
+            setSelectedRecipe(data);
+            setShowModal(true);
+        } catch (error) {
+            console.error("Error fetching recipe details:", error);
+            alert("Failed to fetch recipe details. Please try again.");
+        }
+    };
 
     return (
-        <div className="body rs">
-            {/* Navbar */}
-            <nav className="navbar rs-navbar navbar-expand-lg fixed-top">
-                <div className="container-fluid">
-                    <a className="navbar-brand rs-navbar-brand" href="/home">Culinary Quest</a>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav rs-navbar-nav me-auto">
-                            <li className="nav-item"><a className="nav-link rs-nav-link" href="/recipeSearch">Recipes</a></li>
-                            <li className="nav-item"><a className="nav-link rs-nav-link" href="#categories-section">Categories</a></li>
-                            <li className="nav-item"><a className="nav-link rs-nav-link" href="/MyAccount">My Account</a></li>
-                            <li className="nav-item"><a className="nav-link rs-nav-link" href="/contact">Contact Us</a></li>
-                        </ul>
-                        <form className="d-flex">
-                            <input className="form-control rs-form-control me-2" type="search" placeholder="Search recipes..." aria-label="Search" />
-                            <button className="btn rs-btn-search" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-
-            {/* Header */}
-            <header className="header rs-header">
-                <h3>Find Your Next Favorite Recipe</h3>
-                <p>Search by name, ingredient, or cuisine to discover new culinary adventures!</p>
-            </header>
-
+        <div className="container mt-5">
             {/* Search Bar */}
-            <div className="search-bar rs-search-bar container">
-                <input
-                    type="text"
-                    placeholder="Search recipes by name, ingredient, or cuisine..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-                <button className="btn rs-btn" onClick={handleSearch}>Search</button>
+            <div className="row justify-content-center mb-4">
+                <div className="col-md-6">
+                    <form onSubmit={handleSearch} className="d-flex">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search recipes..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <button className="btn btn-primary ms-2" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
 
-            {/* Filters Section */}
-            <section className="filters-section rs-filters-section container">
-                <h3>Filters</h3>
-                <form>
-                    <div className="mb-3">
-                        <label htmlFor="cuisineType" className="form-label rs-form-label">Cuisine Type</label>
-                        <select id="cuisineType" className="form-control rs-form-control">
-                            <option>Italian</option>
-                            <option>Indian</option>
-                            <option>Chinese</option>
-                            <option>Mexican</option>
-                        </select>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="prepTime" className="form-label rs-form-label">Preparation Time</label>
-                        <input type="range" className="form-control rs-form-range" id="prepTime" min="0" max="120" defaultValue="30" />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label rs-form-label">Dietary Restrictions</label>
-                        <div className="form-check">
-                            <input className="form-check-input rs-form-check-input" type="checkbox" id="vegan" />
-                            <label className="form-check-label rs-form-check-label" htmlFor="vegan">Vegan</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input rs-form-check-input" type="checkbox" id="glutenFree" />
-                            <label className="form-check-label rs-form-check-label" htmlFor="glutenFree">Gluten-Free</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input rs-form-check-input" type="checkbox" id="Nut-Free" />
-                            <label className="form-check-label rs-form-check-label" htmlFor="Nut-Free">Nut-Free</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input rs-form-check-input" type="checkbox" id="Dairy-Free" />
-                            <label className="form-check-label rs-form-check-label" htmlFor="Dairy-Free">Dairy-Free</label>
-                        </div>
-                    </div>
-                    <button type="button" className="btn rs-btn-apply">Apply Filters</button>
-                </form>
-            </section>
-
-            {/* Results Section */}
-            <section className="results-section container">
-                <h3>{searchPerformed ? 'Search Results' : 'Popular Recipes'}</h3>
+            {/* Search Results */}
+            {recipes.length > 0 && (
                 <div className="row">
-                    {displayRecipes.length > 0 ? (
-                        displayRecipes.map((recipe) => (
-                            <div key={recipe.id} className="col-md-4 mb-4">
-                                <div className="card recipe-card">
-                                    <img 
-                                        src={recipe.image} 
-                                        alt={recipe.title}
-                                        className="card-img-top"
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{recipe.title}</h5>
-                                        <p className="card-text">
-                                            Prep Time: {recipe.prepTime} | Rating: {recipe.rating}
-                                        </p>
-                                        <button className="btn btn-view">View Recipe</button>
-                                    </div>
+                    {recipes.map((recipe) => (
+                        <div key={recipe.id} className="col-md-4 mb-4">
+                            <div className="card">
+                                <img
+                                    src={recipe.image}
+                                    className="card-img-top"
+                                    alt={recipe.title}
+                                />
+                                <div className="card-body">
+                                    <h5 className="card-title">{recipe.title}</h5>
+                                    <button
+                                        className="btn btn-info"
+                                        onClick={() => handleViewRecipe(recipe.id)}
+                                    >
+                                        View Recipe
+                                    </button>
                                 </div>
                             </div>
-                        ))
-                    ) : (
-                        searchPerformed && <p className="text-center">No recipes found. Try a different search.</p>
-                    )}
+                        </div>
+                    ))}
                 </div>
+            )}
 
-                {/* Pagination */}
-                {displayRecipes.length > 0 && (
-                    <nav>
-                        <ul className="pagination">
-                            <li className="page-item">
-                                <a className="page-link" href="#">Previous</a>
-                            </li>
-                            <li className="page-item active">
-                                <a className="page-link" href="#">1</a>
-                            </li>
-                            <li className="page-item">
-                                <a className="page-link" href="#">2</a>
-                            </li>
-                            <li className="page-item">
-                                <a className="page-link" href="#">3</a>
-                            </li>
-                            <li className="page-item">
-                                <a className="page-link" href="#">Next</a>
-                            </li>
+            {/* No results message */}
+            {recipes.length === 0 && query && (
+                <div className="alert alert-warning mt-4" role="alert">
+                    No recipes found. Try a different search.
+                </div>
+            )}
+
+            {/* Modal for Recipe Details */}
+            {selectedRecipe && (
+                <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.Title>{selectedRecipe.title}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <img
+                            src={selectedRecipe.image}
+                            alt={selectedRecipe.title}
+                            className="img-fluid mb-3"
+                        />
+                        <p><strong>Servings:</strong> {selectedRecipe.servings}</p>
+                        <p><strong>Preparation Time:</strong> {selectedRecipe.readyInMinutes} minutes</p>
+                        <p><strong>Ingredients:</strong></p>
+                        <ul>
+                            {selectedRecipe.extendedIngredients.map((ingredient) => (
+                                <li key={ingredient.id}>{ingredient.original}</li>
+                            ))}
                         </ul>
-                    </nav>
-                )}
-            </section>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                            Close
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+            )}
         </div>
     );
 };
