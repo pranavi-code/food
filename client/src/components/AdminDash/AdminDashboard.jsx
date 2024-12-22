@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { format } from "date-fns";
 import axios from 'axios';
 import "./AdminDashboard.css"; // Ensure the path is correct
 import adminImage from "../images/admin_dashboard.jpeg"; // Adjust the path as needed
 
 const AdminDashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0); // State for total users
-  const [feedbackReports, setFeedbackReports] = useState(230); // Placeholder for feedback reports
+  const [feedbackReports, setFeedbackReports] = useState(0); // State for feedback reports (dynamic)
   const [activeAlerts, setActiveAlerts] = useState(15); // Placeholder for active alerts
   const [recentFeedback, setRecentFeedback] = useState([]); // State for recent feedback
 
@@ -28,22 +29,50 @@ const AdminDashboard = () => {
         console.error("Error fetching total users:", error.message || error);
       }
     };
-    
+
+    const fetchTotalFeedback = async () => {
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("authToken");
+        console.log("Token:", token); // Check if token is available
+
+        if (!token) throw new Error("Authorization token missing.");
+
+        const response = await axios.get("http://localhost:5000/api/admin/total-feedback", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        console.log("Response Data:", response.data); // Log the response data
+        setFeedbackReports(response.data.totalFeedback || 0);
+      } catch (error) {
+        console.error("Error fetching total feedback:", error.message || error);
+      }
+    };
 
     const fetchRecentFeedback = async () => {
       try {
-        // Replace this with your actual API call to fetch recent feedback
-        const feedbackData = [
-          { issue: "Feature Improvement", details: "Feedback regarding feature improvements.", date: "2024-12-06", status: "Resolved" },
-          { issue: "UI Complaint", details: "Complaint about UI design.", date: "2024-12-05", status: "Pending" },
-        ];
-        setRecentFeedback(feedbackData);
+        // Fetch recent feedback from the backend API
+        const response = await axios.get("http://localhost:5000/api/feedback");
+        console.log("Raw Feedback Data:", response.data); // Log raw feedback data for debugging
+    
+        // Transform or validate feedback data
+        const transformedFeedback = response.data.map(feedback => ({
+          name: feedback.name || "N/A", // Fallback for missing name
+          email: feedback.email || "N/A", // Fallback for missing email
+          message: feedback.message || "No details provided", // Fallback for missing message
+          createdAt: feedback.createdAt ? new Date(feedback.createdAt).toISOString() : null, // Parse createdAt or set null
+          status: feedback.status || "Pending", // Default status if missing
+        }));
+    
+        console.log("Transformed Feedback Data:", transformedFeedback); // Log transformed data
+        setRecentFeedback(transformedFeedback); // Set validated data in state
       } catch (error) {
         console.error("Error fetching feedback:", error.message || error);
       }
     };
 
+    // Fetch all data
     fetchTotalUsers();
+    fetchTotalFeedback(); // Fetch total feedback count
     fetchRecentFeedback();
   }, []);
 
@@ -126,25 +155,41 @@ const AdminDashboard = () => {
             <caption>List of recent feedback submitted by users</caption>
             <thead>
               <tr>
-                <th scope="col">Issue</th>
-                <th scope="col">Details</th>
+                <th scope="col">Name</th>
+                <th scope="col">Message</th>
+                <th scope="col">Email</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              {recentFeedback.map((feedback, index) => (
-                <tr key={index}>
-                  <td>{feedback.issue}</td>
-                  <td>{feedback.details}</td>
-                  <td>{feedback.date}</td>
-                  <td>
-                    <button className={`btn btn-${feedback.status === "Resolved" ? "success" : "warning"} btn-sm`}>
-                      {feedback.status}
-                    </button>
-                  </td>
+              {recentFeedback.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center">No feedback available.</td>
                 </tr>
-              ))}
+              ) : (
+                recentFeedback.map((feedback, index) => {
+                  const formattedDate = feedback.createdAt
+                    ? format(new Date(feedback.createdAt), "yyyy-MM-dd HH:mm")
+                    : "N/A";
+
+                  return (
+                    <tr key={index}>
+                      <td>{feedback.name || "No name provided"}</td>
+                      <td>{feedback.message || "No message provided"}</td>
+                      <td>{feedback.email || "No email provided"}</td>
+                      <td>{formattedDate}</td>
+                      <td>
+                        <button
+                          className={`btn btn-${feedback.status === "Resolved" ? "success" : "warning"} btn-sm`}
+                        >
+                          {feedback.status || "No status"}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

@@ -33,7 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/feedback', feedbackRoutes);
-
+app.use(adminRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
