@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./MyAccount.css";
+import profilePic from "../images/profile-pic.jpeg";
 
+import "./MyAccount.css";
 function MyAccount() {
   const navigate = useNavigate();
 
@@ -54,17 +55,7 @@ function MyAccount() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search recipes..."
-                aria-label="Search"
-              />
-              <button className="btn btn-search" type="submit">
-                Search
-              </button>
-            </form>
+            
           </div>
         </div>
       </nav>
@@ -73,11 +64,12 @@ function MyAccount() {
       <div className="myaccount-container">
         {/* Profile Section */}
         <div className="myaccount-profile-section">
-          <img
-            src="https://via.placeholder.com/120"
-            alt="Profile Picture"
-            className="profile-picture"
-          />
+        <img
+  src={profilePic}
+  alt="Profile Picture"
+  className="profile-picture"
+/>
+
           <div className="myaccount-profile-info">
             <h2>My Profile</h2>
             <p>
@@ -96,36 +88,6 @@ function MyAccount() {
             </div>
           </div>
         </div>
-
-        {/* Saved Recipes Section */}
-        <div className="myaccount-saved-recipes">
-          <h2>Saved Recipes</h2>
-          <div className="myaccount-recipe-card">
-            <img
-              src="https://via.placeholder.com/100"
-              alt="Recipe Image"
-              className="recipe-image"
-            />
-            <div>
-              <h5>Spaghetti Bolognese</h5>
-              <button className="btn btn-view">View</button>
-              <button className="btn btn-delete">Delete</button>
-            </div>
-          </div>
-          <div className="myaccount-recipe-card mt-3">
-            <img
-              src="https://via.placeholder.com/100"
-              alt="Recipe Image"
-              className="recipe-image"
-            />
-            <div>
-              <h5>Chocolate Cake</h5>
-              <button className="btn btn-view">View</button>
-              <button className="btn btn-delete">Delete</button>
-            </div>
-          </div>
-        </div>
-
         {/* Settings Section */}
         <div className="myaccount-settings-section">
           <h2>Settings</h2>

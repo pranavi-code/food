@@ -37,17 +37,6 @@ function EditProfile() {
                 <a className="nav-link" href="/contact">Contact Us</a>
               </li>
             </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search recipes..."
-                aria-label="Search"
-              />
-              <button className="btn btn-search" type="submit">
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>

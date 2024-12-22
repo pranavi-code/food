@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RecipeSearch.css";
 
-const API_KEY = "d27e691f24ef40b7b63bfc091167f8fe";
+const API_KEY = "0236c6e7929a4419b65f5429fc7b1d6f";
 const API_URL = "https://api.spoonacular.com/recipes/complexSearch";
 const RECIPE_DETAILS_URL = "https://api.spoonacular.com/recipes";
 
@@ -61,12 +61,12 @@ const RecipeSearch = () => {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link rs-nav-link" href="#categories-section">
+                                <a className="nav-link rs-nav-link" href="#categories">
                                     Categories
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link rs-nav-link" href="/MyAccount">
+                                <a className="nav-link rs-nav-link" href="/profile">
                                     My Account
                                 </a>
                             </li>

@@ -103,8 +103,6 @@ const BananaDetails = () => {
         </ol>
 
         {/* Save and Share Buttons */}
-        <button className="recipe-btn-save">Save Recipe</button>
-        <button className="recipe-btn-share">Share Recipe</button>
       </section>
 
       {/* Share Section */}
@@ -116,74 +114,6 @@ const BananaDetails = () => {
           <i className="fab fa-pinterest"></i>
         </div>
       </section>
-
-      {/* Comments Section */}
-      <section className="recipe-comments-section container">
-        <h4>Comments</h4>
-        <textarea
-          className="form-control"
-          rows="3"
-          placeholder="Leave a comment..."
-        ></textarea>
-        <button className="recipe-btn-post">Post Comment</button>
-
-        {/* Already Posted Comments */}
-        <div className="mt-4">
-          <p>
-            <strong>Jane Doe:</strong> These pancakes were delicious and so fluffy!
-          </p>
-          <p>
-            <strong>Mike Smith:</strong> Perfect breakfast recipe, quick and easy!
-          </p>
-        </div>
-      </section>
-
-      {/* Related Recipes Section */}
-      <section className="recipe-related-recipes container">
-        <h3>Related Recipes</h3>
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card">
-              <img
-                src="https://via.placeholder.com/400x250"
-                className="card-img-top"
-                alt="Recipe 1"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Recipe 1</h5>
-                <p className="card-text">Quick and easy pasta dish.</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card">
-              <img
-                src="https://via.placeholder.com/400x250"
-                className="card-img-top"
-                alt="Recipe 2"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Recipe 2</h5>
-                <p className="card-text">Delicious chicken curry.</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card">
-              <img
-                src="https://via.placeholder.com/400x250"
-                className="card-img-top"
-                alt="Recipe 3"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Recipe 3</h5>
-                <p className="card-text">Vegetarian delight.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="recipe-footer">
         <p>&copy; 2024 Culinary Quest | All Rights Reserved</p>
