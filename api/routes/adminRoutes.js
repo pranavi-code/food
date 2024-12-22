@@ -95,7 +95,7 @@ router.post("/cp", async (req, res) => {
 
 
 
-  router.post('/update-profile', adminMiddleware, upload.single('profilePicture'), async (req, res) => {
+/*   router.post('/update-profile', adminMiddleware, upload.single('profilePicture'), async (req, res) => {
     try {
         const { name, email } = req.body;
         const admin = req.user; // From the middleware
@@ -124,5 +124,5 @@ router.post("/cp", async (req, res) => {
 });
 
 
-
+ */
 module.exports = router;
