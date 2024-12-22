@@ -1,7 +1,7 @@
 const express = require('express');
 const Recipe = require('../models/Recipe');
 const multer = require('multer'); // Import multer for file uploads
-const adminMiddleware = require('../middleware/adminMiddleware');
+const adminMiddleware = require('../middleware/adminMiddleware.js');
 const authMiddleware = require('../middleware/verifyToken');
 
 const router = express.Router();
