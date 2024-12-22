@@ -117,26 +117,14 @@ const FeedbackReports = () => {
                   Recipe Management
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/categoryManagement">
-                  Category Management
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/userManagement">
-                  Manage Users
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/setting">
-                  Settings
-                </a>
-              </li>
+              
+            
               <li className="nav-item">
                 <a className="nav-link" href="/feedback">
                   Feedback
                 </a>
               </li>
+              <a className="nav-link" href="/" id="logoutBtn" onClick={logout}>Logout</a>
             </ul>
           </div>
         </div>

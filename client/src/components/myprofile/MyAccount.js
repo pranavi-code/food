@@ -76,9 +76,9 @@ function MyAccount() {
               <strong>Name:</strong> {localStorage.getItem("username")}
             </p>
             <div className="d-flex gap-2">
-              <a href="/editProfile" id="edit">
+              {/* <a href="/editProfile" id="edit">
                 <button className="btn btn-edit">Edit Profile</button>
-              </a>
+              </a> */}
               <button 
                 className="btn btn-view" 
                 onClick={handleLogout}
@@ -89,7 +89,7 @@ function MyAccount() {
           </div>
         </div>
         {/* Settings Section */}
-        <div className="myaccount-settings-section">
+        {/* <div className="myaccount-settings-section">
           <h2>Settings</h2>
           <form>
             <div className="mb-3">
@@ -123,7 +123,7 @@ function MyAccount() {
               Save Changes
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
 
       {/* Footer */}

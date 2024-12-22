@@ -2,6 +2,7 @@
 
 
 /* Navbar */
+
 .myaccount-navbar {
     background-color: #1a2736;
     padding: 1.2rem 0;
@@ -41,6 +42,9 @@
     background-color: whitesmoke;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    height: 80vh; /* Set a specific height for the page */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Profile Section */
@@ -139,4 +143,6 @@
     color: #E7E8E7;
     text-align: center;
     padding: 1rem 0;
+    position: relative;
+    bottom: 0;
 }

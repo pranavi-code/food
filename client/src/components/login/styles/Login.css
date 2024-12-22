@@ -2,7 +2,8 @@
 
 body.login-page {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #87a8e5, #d4dfe8);
+    
+  background: linear-gradient(135deg, #8ab2c9, #8FBFDA, #2C6485, #22303F);
     color: #000000;
     height: 100vh;
     margin: 0;
@@ -13,16 +14,17 @@ body.login-page {
 .login-page-container {
     display: flex;
     flex-wrap: wrap;
-    width: 600px; /* Fixed width instead of percentage */
+    width: 550px; /* Fixed width instead of percentage */
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: 80vh;
   }
   
   /* Image Section */
   .login-image-section {
-    flex: 1;
+    flex: 0.5;
     min-height: 250px;
     position: relative;
     background-size: cover; /* Ensure the image covers the entire section */
@@ -40,7 +42,7 @@ body.login-page {
   }
   /* Form Section */
   .login-form-section {
-    flex: 1.2;
+    flex: 0.5;
     padding: 20px;
     display: flex;
     flex-direction: column;
