@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';  // Import useEffect here
 import './styles/Login.css';
 import LoginForm from './LoginForm';
-import SocialLogin from './SocialLogin';
 import loginImage from '../images/login.jpeg';
 
 function Login() {
@@ -32,7 +31,6 @@ function Login() {
           Discover exclusive recipes and join a vibrant community.
         </p>
         <LoginForm />
-        <SocialLogin />
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import FeaturesSection from './FeaturesSection';
 import Footer from './Footer';
 import HeroSection from './HeroSection';
 import Navbar from './Navbar';
-import NewsletterSection from './NewsletterSection';
 
 const App = () => {
   return (
@@ -14,7 +13,6 @@ const App = () => {
       <HeroSection />
       <FeaturesSection />
       <AboutSection />
-      <NewsletterSection />
       <Footer />
     </div>
   );

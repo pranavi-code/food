@@ -1,9 +1,13 @@
 const express = require('express');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const multer = require('multer');
+const authMiddleware = require('../middleware/verifyToken');
 const User = require('../models/User');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Feedback = require('../models/Feedback');
+const path = require('path');
+// Create an Express router
 
 // Admin Dashboard Route
 router.get('/dashboard', adminMiddleware, (req, res) => {
@@ -88,5 +92,37 @@ router.post("/cp", async (req, res) => {
       return res.status(500).json({ error: "Internal server error" });
     }
   });
+
+
+
+  router.post('/update-profile', adminMiddleware, upload.single('profilePicture'), async (req, res) => {
+    try {
+        const { name, email } = req.body;
+        const admin = req.user; // From the middleware
+
+        admin.name = name || admin.name;
+        admin.email = email || admin.email;
+
+        if (req.file) {
+            admin.profilePic = req.file.path;
+        }
+
+        await admin.save();
+
+        return res.status(200).json({
+            message: 'Profile updated successfully!',
+            admin: {
+                name: admin.name,
+                email: admin.email,
+                profilePic: admin.profilePic,
+            }
+        });
+    } catch (error) {
+        console.error('Error updating profile:', error); 
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
 
 module.exports = router;

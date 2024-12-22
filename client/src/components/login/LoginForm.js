@@ -81,13 +81,11 @@ function LoginForm() {
         />
       </div>
       <div className="login-options">
-        <div className="login-remember-me">
-          <input type="checkbox" id="login-remember-checkbox" />
-          <label htmlFor="login-remember-checkbox">Remember me</label>
-        </div>
-        <a href="/resetPassword" className="login-forgot-password">
-          Forgot Password?
-        </a>
+      <div className="social-login-register">
+        <p>
+          Don't have an account? <a href="/register" className="social-login-register-link">Register Now</a>
+        </p>
+      </div>
       </div>
       <button type="submit" className="login-submit-button">
         Log In

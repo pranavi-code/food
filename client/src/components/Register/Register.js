@@ -1,6 +1,5 @@
 import React ,{useEffect }from 'react';
 import RegisterForm from './RegisterForm';
-import SocialLogin from './SocialLogin';
 import './styles/Register.css';
 import regImg from '../images/reg_img.jpg'; // Import the image from the assets folder
 function Register() {
@@ -26,7 +25,6 @@ function Register() {
         <h2 className="register-title">Create an Account</h2>
         <p className="register-subtitle">Join us for exclusive recipes and more.</p>
         <RegisterForm />
-        <SocialLogin />
         <div className="register-login-option">
           <p>
             Already have an account?{' '}
