@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./EditProfile.css";
 
 function EditProfile() {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    role: "",
+  });
+
+  useEffect(() => {
+    // Retrieve individual pieces of data from localStorage
+    const name = localStorage.getItem("username");
+    const email = localStorage.getItem("email");
+    const role = localStorage.getItem("role");
+
+    // Set state with retrieved data
+    if (name && email && role) {
+      setUserData({
+        name,
+        email,
+        role,
+      });
+    }
+  }, []);
+
   const saveProfile = (event) => {
     event.preventDefault();
-    // Add functionality to save profile changes
+    // Add functionality to save profile changes here
     alert("Profile saved!");
   };
 
@@ -53,10 +75,13 @@ function EditProfile() {
           <div className="edit-profile-info">
             <h2>Edit Profile</h2>
             <p>
-              <strong>Name:</strong> <span id="name-preview">John Doe</span>
+              <strong>Name:</strong> <span>{userData.name || "Loading..."}</span>
             </p>
             <p>
-              <strong>Email:</strong> <span id="email-preview">johndoe@example.com</span>
+              <strong>Email:</strong> <span>{userData.email || "Loading..."}</span>
+            </p>
+            <p>
+              <strong>Role:</strong> <span>{userData.role || "Loading..."}</span>
             </p>
           </div>
         </div>
@@ -73,7 +98,7 @@ function EditProfile() {
               id="name"
               className="form-control"
               placeholder="Enter your name"
-              defaultValue="John Doe"
+              defaultValue={userData.name}
             />
           </div>
           <div className="mb-3">
@@ -85,7 +110,7 @@ function EditProfile() {
               id="email"
               className="form-control"
               placeholder="Enter your email"
-              defaultValue="johndoe@example.com"
+              defaultValue={userData.email}
             />
           </div>
           <div className="mb-3">
